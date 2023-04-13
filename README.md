@@ -47,3 +47,9 @@ const JSX =
 ```
 
 - The above is invalid and it will not transpile.
+
+## Add Comments in JSX
+
+- JSX has its own commenting syntax
+
+`{/* This is a JSX comment */}`
