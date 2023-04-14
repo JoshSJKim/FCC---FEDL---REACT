@@ -53,3 +53,40 @@ const JSX =
 - JSX has its own commenting syntax
 
 `{/* This is a JSX comment */}`
+
+## Render HTML Element to the DOM
+
+- With React, we can render JSX directly to the HTML DOM using React's rendering API known as ReactDOM
+- It offers a simple method to render React element o the DOM, which looks like the following
+  - `ReactDOM.render(componentToRender, targetNode)`
+  - The first argument is the React element or component that requires rendering
+  - The second argument is the DOM node to which the component will be rendered.
+
+- `ReactDOM.render()` must be called after the JSX element declarations, just like variables need declaring before use.
+
+Challenge
+
+- The code editor has a simple JSX component.
+- Use the `ReactDOM.render()` method to render this component to the page.
+- You can pass defined JSX elements directly in as the first argument and use `document.getElementById()` to select the DOM node to render them to.
+- There is a div with id='challenge-node' available for you to use.
+- Make sure you don't change the JSX constant.
+
+```jsx
+const JSX = (
+  <div>
+    <h1>Hello World</h1>
+    <p>Lets render this to the DOM</p>
+  </div>
+);
+// Change code below this line
+
+ReactDOM.render(JSX, document.getElementById("challenge-node"))
+```
+
+- `ReactDOM.render()` method will render the specified component (JSX) to the page by specifying the `target node`
+- Use `document.getElementById()` method to select the target DOM node.
+  - "There is a div with id='challenge-node' available for you to use"
+    - This means that there is a `<div>` element in the index.html file with `id='challenge-node'`
+      - `<div id='challenge-node'></div>`
+- `ReactDOM.render(JSX, document.getElementById("challenge-node"))` will inject the `JSX` component (the React element) into the specified `div` element, which will then appear on a web page.
