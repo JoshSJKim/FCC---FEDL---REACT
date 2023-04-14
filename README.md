@@ -85,7 +85,7 @@ ReactDOM.render(JSX, document.getElementById("challenge-node"))
 ```
 
 - `ReactDOM.render()` method will render the specified component (JSX) to the page by specifying the `target node`
-- Use `document.getElementById()` method to select the target DOM node.
+- Use `document.getElementById()` method to select the target DOM node. (Make sure not to capitalize ID)
   - "There is a div with id='challenge-node' available for you to use"
     - This means that there is a `<div>` element in the index.html file with `id='challenge-node'`
       - `<div id='challenge-node'></div>`
