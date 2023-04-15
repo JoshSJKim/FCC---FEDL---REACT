@@ -101,9 +101,23 @@ ReactDOM.render(JSX, document.getElementById("challenge-node"))
 
 ```jsx
 const JSX = ( 
-  <div className="myDiv"> //
+  <div className="myDiv">
     <h1>Add a class to this div</h1>
   </div>
 );
 // Note that 'className' is used to define the HTML class.
 ```
+
+## Learn About Self-Closing JSX Tags
+
+- The idea of 'self-closing tags' is different in JSX and HTML
+- In HTML, almost all tags have both opening and closing tags.
+  - The closing tags always begin with a forward slash before the tag name that is being closed.
+  - There are special instances in HTML that have 'self-closing tags'.
+  - For example, line-break tags can be written as `<br>` or `<br />`, but never `<br></br> since it does not contain any content.
+
+- In JSX, the rules are a little different.
+- Any JSX element can be written with a self-closing tag, and every element must be closed.
+- A `<div>` element can be written as `<div />` or `<div></div>`, depending on the circumstance.
+  - If the `<div>` element contains content, it requires a separate closing tag
+  - but if it does not contain any content, the self-closing tag is valid.
