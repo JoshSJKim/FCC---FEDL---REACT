@@ -90,3 +90,20 @@ ReactDOM.render(JSX, document.getElementById("challenge-node"))
     - This means that there is a `<div>` element in the index.html file with `id='challenge-node'`
       - `<div id='challenge-node'></div>`
 - `ReactDOM.render(JSX, document.getElementById("challenge-node"))` will inject the `JSX` component (the React element) into the specified `div` element, which will then appear on a web page.
+
+## Define an HTML Class in JSX
+
+- HTML and JSX seems very similar, but there are several things to keep in mind.
+- the word `'class'` cannot be used to define HTML classes since it is a reserved word in JS.
+- JSX uses `'className'` instead.
+
+- Naming convention for all HTML attributes and event references in JSX become `camelCase`.
+
+```jsx
+const JSX = ( 
+  <div className="myDiv"> //
+    <h1>Add a class to this div</h1>
+  </div>
+);
+// Note that 'className' is used to define the HTML class.
+```
