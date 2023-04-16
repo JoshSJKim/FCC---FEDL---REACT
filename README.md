@@ -269,3 +269,97 @@ class TypesOfFood extends React.Component {
 - in the code above, `TypesOfFruit` is composed, or `nested` within another constant variable `Fruits`.
 - Then `Fruits` is `nested` again in `TypesOfFood`.
 - Think of it as 'multi-dimensional components'.
+
+## Compose React Components
+
+- When handling more complex compositions with React components and JSX, there is one important thing to note.
+- Rendering ES6 style class components within other components is no different than rendering simple components.
+- It is possible to render JSX elements, stateless functional components, and ES6 class components within other components.
+
+```js
+const NonCitrus = () => {
+  return (
+    <div>
+      <h3>Non-Citrus:</h3>
+      <ul>
+        <li>Apples</li>
+        <li>Blueberries</li>
+        <li>Strawberries</li>
+        <li>Bananas</li>
+      </ul>
+    </div>
+  );
+};
+
+const Citrus = () => {
+  return (
+    <div>
+      <h3>Citrus:</h3>
+      <ul>
+        <li>Lemon</li>
+        <li>Lime</li>
+        <li>Orange</li>
+        <li>Grapefruit</li>
+      </ul>
+    </div>
+  );
+};
+
+const Veggies = () => {
+  return (
+    <div>
+      <ul>
+        <li>Brussel Sprouts</li>
+        <li>Broccoli</li>
+        <li>Squash</li>
+      </ul>
+    </div>
+  );
+};
+
+class Vegetables extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render () {
+    return (
+      <div>
+        <h2>Vegetables:</h2>
+        <Veggies />
+      </div>
+    );
+  }
+}
+
+class Fruits extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render () {
+    return (
+      <div>
+        <h2>Fruits:</h2>
+        <NonCitrus />
+        <Citrus />
+      </div>
+    );
+  }
+};
+
+class TypesOfFood extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render () {
+    return (
+      <div>
+        <h1>Types of Food:</h1>
+        <Fruits />
+        <Vegetables />
+      </div>
+    );
+  }
+};
+```
+
+- Examine which stateless functional component is nested where, and which ES6 class component is nested where
