@@ -174,3 +174,46 @@ class MyComponent extends React.Component {
 - The constructor is a special method used during the initialization of objects that are created with the `class` keyword.
 - It is best practice to call a component's `constructor` with `super`, and pass `props` to both.
   - This ensures that the component is initialized properly. It is a standard for this code to be included.
+
+## Create a Component with Composition
+
+- In order to compose multiple React components together, you could create a `parent` component, which then renders the defined 'stateless functional components' as the `children` of the `parent` component.
+- To render a component as a child in a React component, include the component name written as a custom HTML tag in the JSX.
+
+```js
+const ChildComponent = () => {
+  return (
+    <div>
+      <p>I am the Child</p>
+    </div>
+  );
+};
+
+const SiblingComponent = () => {
+  return (
+    <div>
+      <p>I am the sibling</p>
+    </div>
+  );
+};
+
+class ParentComponent extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return(
+      <div>
+        <h1>I am the parent</h1>
+        <ChildComponent />
+        <SiblingComponent />
+      </div>
+    );
+  }
+};
+```
+
+- When React encounters a custom HTML tag that references another component (component name with a self-closing tag in this case), it renders the markup for that component in the location of the tag.
+- Anything defined in the `stateless functional components` will be displayed on the page if included in the parent component.
+
+- Note `ChildComponent` and `SiblingComponent` above are defined with an ES6 arrow function because this is a very common practice when using React.
