@@ -114,10 +114,63 @@ const JSX = (
 - In HTML, almost all tags have both opening and closing tags.
   - The closing tags always begin with a forward slash before the tag name that is being closed.
   - There are special instances in HTML that have 'self-closing tags'.
-  - For example, line-break tags can be written as `<br>` or `<br />`, but never `<br></br> since it does not contain any content.
+  - For example, line-break tags can be written as `<br>` or `<br />`, but never `<br></br>` since it does not contain any content.
 
 - In JSX, the rules are a little different.
 - Any JSX element can be written with a self-closing tag, and every element must be closed.
 - A `<div>` element can be written as `<div />` or `<div></div>`, depending on the circumstance.
   - If the `<div>` element contains content, it requires a separate closing tag
   - but if it does not contain any content, the self-closing tag is valid.
+
+## Create a Stateless Functional Component
+
+- Components are the core of React. Everything in React is a component.
+- There are two ways to create a React component.
+  - The first way is to use a JS function.
+  - Defining a component in this manner creates a 'stateless functional component'.
+    - Think of it as a component that can receive data and render it, but does not manage or track changes to the data.
+    - (The second method to create components will be covered later)
+
+- Simply write a JS function that returns either JSX or `null`.
+- Make note that React requires the function name to begin with an uppercase letter.
+
+```js
+const DemoComponent = function() {
+  return (
+    <div className="customClass" />
+  ):
+}:
+```
+
+- Above is a stateless functional component that assigns an HTML class in JSX.
+
+- Since JSX components represent HTML, it is possible to put several components together to create a more complex HTML page.
+- It allows the developer to compose the UI from many separate, isolated components, making it easer to build and maintain complex UI.
+
+## Create a React Component
+
+- The other method to create a React component is by using the ES6 `class` syntax.
+
+```js
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h1>Hello React!</h1>
+      </div>
+    );
+  }
+}
+```
+
+- This creates an ES6 class `MyComponent` which extends the `React.Component` class.
+- Now, `MyComponent` class has access to many useful React features (which will be covered later on)
+
+- Notice `MyComponent` class has a `constructor` defined within it that calls `super()`.
+- `super()` is used to call the constructor of the parent class, which in this case is `React.Component`.
+- The constructor is a special method used during the initialization of objects that are created with the `class` keyword.
+- It is best practice to call a component's `constructor` with `super`, and pass `props` to both.
+  - This ensures that the component is initialized properly. It is a standard for this code to be included.
