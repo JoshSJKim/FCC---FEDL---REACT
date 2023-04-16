@@ -193,6 +193,7 @@ const SiblingComponent = () => {
   return (
     <div>
       <p>I am the sibling</p>
+      <p>I am also a child</p>
     </div>
   );
 };
@@ -217,3 +218,54 @@ class ParentComponent extends React.Component {
 - Anything defined in the `stateless functional components` will be displayed on the page if included in the parent component.
 
 - Note `ChildComponent` and `SiblingComponent` above are defined with an ES6 arrow function because this is a very common practice when using React.
+
+## Use React to Render Nested Components
+
+- Component composition is one of React's powerful features.
+- When working with React, it is important to think about the user interface in terms of components.
+- Break down the UI into its basic building blocks, which are components.
+- This helps to separate the code responsible for the UI from the code responsible for handling the application logic.
+- It simplifies the development and maintenance of complex projects.
+
+```js
+const TypesOfFruit = () => {
+  return (
+    <div>
+      <h2>Fruits:</h2>
+      <ul>
+        <li>Apples</li>
+        <li>Blueberries</li>
+        <li>Strawberries</li>
+        <li>Bananas</li>
+      </ul>
+    </div>
+  );
+};
+
+const Fruits = () => {
+  return (
+    <div>
+      <TypesOfFruit />
+    </div>
+  );
+};
+
+class TypesOfFood extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render () {
+    return (
+      <div>
+        <h1>Types of Food:</h1>
+        <Fruits />
+      </div>
+    );
+  }
+};
+```
+
+- in the code above, `TypesOfFruit` is composed, or `nested` within another constant variable `Fruits`.
+- Then `Fruits` is `nested` again in `TypesOfFood`.
+- Think of it as 'multi-dimensional components'.
