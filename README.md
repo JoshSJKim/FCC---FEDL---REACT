@@ -362,4 +362,41 @@ class TypesOfFood extends React.Component {
 };
 ```
 
-- Examine which stateless functional component is nested where, and which ES6 class component is nested where
+- Examine which stateless functional component is nested where, and which ES6 class component is nested where.
+
+## Render a Class Component to the DOM
+
+- Remember how to use ReactDOM API. 
+
+`ReactDOM.render(componentToRender, targetNode)`
+
+- The process for rendering react components is very similar.
+- Instead of rendering individual JSX elements, it is possible to render complex React components to the DOM.
+- The syntax is slightly different.
+- Use the same syntax as if you were rendering nested components
+
+`ReactDOM.render(<componentToRender />, targetNode)`
+
+- The above syntax can be used for both ES6 class components and functional components.
+
+- Let's use the `Fruits` and `Vegetables` components defined in the previous exercise
+- There is a `div` with `id = 'challenge-node'` available for use.
+
+```js
+class TypesOfFood extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h1>Types Of Food:</h1>
+          <Fruits />
+          <Vegetables />
+      </div>
+    );
+  }
+};
+
+ReactDom.render(<TypesOfFood />, document.getElementById("challenge-node"));
+```
