@@ -366,7 +366,7 @@ class TypesOfFood extends React.Component {
 
 ## Render a Class Component to the DOM
 
-- Remember how to use ReactDOM API. 
+- Remember how to use ReactDOM API.
 
 `ReactDOM.render(componentToRender, targetNode)`
 
@@ -399,4 +399,27 @@ class TypesOfFood extends React.Component {
 };
 
 ReactDom.render(<TypesOfFood />, document.getElementById("challenge-node"));
+```
+
+## Practice Writing a React Component from Scratch
+
+- It is important to become very familiar with writing React components since they are the building blocks of React applications.
+- A typical React component is an ES6 class, which extends `React.Component`.
+- It has a render method that returns HTML (from JSX) or `null`.
+
+```js
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h1>My First React Component!</h1>
+      </div>
+    );
+  }
+};
+
+ReactDOM.render(<MyComponent />, document.getElementById("challenge-node"));
 ```
