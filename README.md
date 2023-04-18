@@ -523,7 +523,6 @@ class ToDo extends React.Component {
 - React assigns default props if props are undefined.
 - But if you pass `null` as the value for a prop, it will remain `null`.
 
-
 ```jsx
 const ShoppingCart = (props) => {
   return (
@@ -536,4 +535,23 @@ const ShoppingCart = (props) => {
 ShoppingCart.defaultProps = { items: 0 }
 ```
 
+## Override Default Props
 
+- Override the default props value by explicitly setting the prop value.
+
+```jsx
+const Items = (props) => {
+  return <h1>Current Quantity of Items in Cart: {props.quantity}</h1>
+}
+
+Items.defaultProps = { quantity: 0 }
+
+class ShoppingCart extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return <Items quantity = {10} /> {/* This will set the quantity prop value to 10 and override the default value */ }
+  }
+};
+```
