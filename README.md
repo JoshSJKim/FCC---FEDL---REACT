@@ -473,3 +473,67 @@ class Calendar extends React.Component {
   }
 };
 ```
+
+## Pass an Array as Props
+
+- Similar to the previous exercise, it is possible to pass arrays as `props`.
+- To pass an array to a JSX element, it must be treated as JavaScript and wrapped in curly braces.
+
+```jsx
+<ParentComponent>
+  <ChildComponent colors={["green", "blue", "red"]}>
+</ParentComponent>
+```
+
+- The child component then has access to the property `colors`.
+- Array methods such as `join()` can be used when accessing the property.
+- `const ChildComponent = (props) => <p>{props.colors.join(', ')}</p>`
+- This will join all `colors` array items into a comma separated string to produce `<p>green, blue, red</p>`
+
+```jsx
+const List = (props) => {
+  return <p>{props.tasks.join(', ')}</p>
+};
+
+class ToDo extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h1>To Do List</h1>
+        <h2>Today</h2>
+          <List tasks={["a", "b"]} />
+        <h2>Tomorrow</h2>
+          <List tasks={["c", "d", "e"]}>
+      </div>
+    );
+  }
+};
+```
+
+## Use Default Props
+
+- React also has an option to set default props.
+- Assign default props to a component as a property on the component itself, and React assigns the default prop if necessary.
+- If no value is explicitly provided, the default prop value specified will be used.
+- For example `MyComponent.defaultProps = { location: 'Toronto' }` will set the default value of the location prop to `Toronto`.
+- It will remain `Toronto` unless specified otherwise.
+- React assigns default props if props are undefined.
+- But if you pass `null` as the value for a prop, it will remain `null`.
+
+
+```jsx
+const ShoppingCart = (props) => {
+  return (
+    <div>
+      <h1>Shopping Cart Component</h1>
+    </div>
+  )
+};
+
+ShoppingCart.defaultProps = { items: 0 }
+```
+
+
