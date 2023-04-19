@@ -601,3 +601,38 @@ class ShoppingCart extends React.Component {
   }
 };
 ```
+
+## Access Props Using this.props
+
+- If a prop is passed to a ES6 class component as the child component (rather than a stateless functional component), the ES6 class component uses a slightly different convention to access props.
+- Anytime you refer to a class component within itself, use the `this` keyword.
+- To access props within a class component, preface the code that you use to access it with `this`.
+- for example, if an ES6 class component has a prop called `data`, write `{this.props.data}` in JSX
+
+```jsx
+class APP extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return {
+      <div>
+        <Welcome name = "Jesus" />
+      </div>
+    };
+  }
+};
+
+class Welcome extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <p>Hello, <strong>{this.props.name}!</p>
+      </div>
+    );
+  }
+};
+```
