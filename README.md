@@ -636,3 +636,48 @@ class Welcome extends React.Component {
   }
 };
 ```
+
+## Review Using Props with Stateless Functional Components
+
+- All of the exercises until now, except for the last one, dealt with passing props to stateless functional components.
+- Stateless functional components act like pure functions.
+  - It accepts props as input and return the same output every time they are passed the same props.
+
+- `Stateless functional component` is any function you write, which accepts props and returns JSX.
+- `Stateless component`, on the other hand, is a class that extends `React.Component`, but does not use internal state.
+- `stateful component` is a class component that does maintain its own internal state.
+  - These are commonly referred to as components or React components.
+
+- Commonly, try to minimize statefulness and to create stateless functional components wherever possible.
+- This helps contain the state management to a specific area of the application, which will in turn improve development and maintenance of the app by making it easier to follow how changes to state affect its behavior.
+
+```jsx
+class CampSite extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <Camper />
+      </div>
+    );
+  }
+};
+
+const Camper = (props) => {
+  return (
+    <div>
+      <p>{props.name}</p>
+    </div>
+  )
+};
+
+Camper.defaultProps = { name: "CamperBot" }
+Camper.propTypes = { name: PropTypes.string.isRequired }
+```
+
+- `CampSite` component renders `Camper` component as its child.
+- `Camper` component is assigned a default prop of `{ name: 'CamperBot' }
+- `Camper` component renders a `div` element with a nested `p` element to which `{props.name}` is passed.
+- `Camper` component requires a `name` prop of type `string`.
