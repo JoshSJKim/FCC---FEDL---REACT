@@ -681,3 +681,40 @@ Camper.propTypes = { name: PropTypes.string.isRequired }
 - `Camper` component is assigned a default prop of `{ name: 'CamperBot' }
 - `Camper` component renders a `div` element with a nested `p` element to which `{props.name}` is passed.
 - `Camper` component requires a `name` prop of type `string`.
+
+## Create a Stateful Component
+
+- One of the most important topics in React is `state`.
+- `State` consists of any data your application needs to know about, which can change over time.
+- You want the apps to respond to state changes and present and updated UI when necessary.
+
+- Create state in a React component by declaring a `state` property on the component class in its `constructor`.
+- This initializes the component with `state` when it is created.
+- The `state` property must be set to a JavaScript `object`.
+
+```jsx
+this.state = {
+
+}
+```
+
+- `State` object is accessible throughout the life fo the component.
+- It can be updated, rendered in the UI, and passed as props to child components.
+- The `state` object can be as complex or as simple as required.
+- Note that creating a class component by extending `React.Component` is mandatory in order to create `state`
+
+```jsx
+class StatefulComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { firstName: "Josh" }
+  }
+  render() {
+    return (
+      <div>
+        <h1>{this.state.firstName}</h1>
+      </div>
+    );
+  }
+}
+```
