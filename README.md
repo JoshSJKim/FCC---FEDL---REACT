@@ -555,3 +555,49 @@ class ShoppingCart extends React.Component {
   }
 };
 ```
+
+## Use PropTypes to Define the Props You Expect
+
+- React provides useful type-checking features to verify that the components receive the correct type of props.
+- You can set `propTypes` on the component to require the data to be of a specific type, such as an array or a function.
+- This will generate a warning when the data is of any other type.
+
+- It is considered best practice to set `propTypes` when you know what type of prop to expect ahead of time.
+- The method for defining `propTypes` is the same as the method used for `defaultProps`.
+
+For example,
+
+```jsx
+MyComponent.propTypes = { handleClick: PropTypes.func.isRequired }
+```
+
+- In the above example, `PropTypes.func` checks if `handleClick` is a function, and `isRequired` informs React that `handleClick` is a required property for that component.
+- If missing, it will generate a warning.
+
+- Note: `func` represents function. `bool` represents boolean.
+  - These are the only two that use unusual spelling among the seven primitive JavaScript types.
+  - In addition to the primitive types, there are other types available.
+  - You can also check that a prop is a React element. (Search for all other options)
+
+- Note: As of React v15.5.0, `PropTypes` is imported independently from React.
+  - `import PropTypes from 'prop-types';`
+
+```jsx
+
+const Items = (props) => {
+  return <h1>Current Quantity of Items in Cart: {props.quantity}</h1>
+};
+
+Items.propTypes = { quantity: PropTypes.number.isRequired }; { /* This will set the PropTypes to number */ }
+
+Items.defaultProps = { quantity: 0 };
+
+class ShoppingCart extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return <Items />
+  }
+};
+```
