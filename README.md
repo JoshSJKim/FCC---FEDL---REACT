@@ -758,3 +758,29 @@ class MyComponent extends React.Component {
 
 - The above code will display 'freeCodeCamp' on the browser page.
 - Note that in JSX, anything written in curly braces({}) are treated as JavaScript.
+
+## Render State in the UI Another Way
+
+- There is another way to access `state` in a component.
+- In the `render()` method, before the `return` statement, write JS directly.
+- It is possible to declare functions, access data from `state` or `props`, perform computations on this data, etc.
+- Then, you can assign any data to variables, which are accessible in the `return` statement.
+
+```jsx
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: 'freeCodeCamp'
+    }
+  }
+  render() {
+      const name = this.state.name { /* Note that const 'name' is assigned the same value as the name value in the component's state */ }
+    return (                       { /* Also note that curly braces for JS is not required in this part of the code */ }
+      <div>
+        <h1>{name}</h1>
+      </div>
+    );
+  }
+};
+```
