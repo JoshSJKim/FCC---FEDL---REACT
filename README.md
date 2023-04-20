@@ -718,3 +718,43 @@ class StatefulComponent extends React.Component {
   }
 }
 ```
+
+## Render State in the User Interface
+
+- Once a component's initial state is defined, any part of it can be displayed in the UI that is rendered.
+- If a component is stateful, it will always have access to the data in `state` in its `render()` method.
+- The data can be accessed with `this.state`.
+- To access a state value within the `return` of the render method, enclose the value in curly braces
+
+- `state` is one of the most powerful features of components in React.
+- It allows you to track important data in your app and render a UI in response to changes in this data.
+- React uses a 'virtual DOM', which keeps track of changes under the hood.
+- When state data updates, it re-renders components using that data, including child components that received the `state` data as a prop.
+- React automatically updates the actual DOM only where necessary.
+- Simply declare what the UI should look like.
+
+- Note: If a component is stateful, no other components are aware of its `state`.
+- It is completely encapsulated, or local, to that component.
+- It is possible to pass the state data to a child as `props`.
+- This is important because it allows you to write certain logic that can be contained and isolated in one place in the code.
+
+```jsx
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: "freeCodeCamp"
+    }
+  }
+  render() {
+    return (
+      <div>
+        <h1>{this.state.name}</h1>
+      </div>
+    );
+  }
+};
+```
+
+- The above code will display 'freeCodeCamp' on the browser page.
+- Note that in JSX, anything written in curly braces({}) are treated as JavaScript.
