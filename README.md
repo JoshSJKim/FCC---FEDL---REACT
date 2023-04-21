@@ -802,13 +802,13 @@ class MyComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: 'Initial State'
+      name: 'Initial State'   { /* This portion of the code will initialize 'state' */ }
     };
     this.handleClick = this.handleClick.bind(this);
   }
   handleClick() {
     this.setState({
-      name: 'React Rocks!'
+      name: 'React Rocks!'    { /* This portion of the code will update the 'state' data */ }
     });
   }
   render() {
@@ -817,6 +817,43 @@ class MyComponent extends React.Component {
         <button onClick={this.handleClick}>Click Me</button>
         <h1>{this.state.name}</h1>
       </div>
+    );
+  }
+};
+```
+
+## Bind 'this' to a Class Method
+
+- In addition to setting and updating `state`, it is also possible to define methods for the component class.
+- A class method typically requires the use of `this` keyword in order to access properties on the class (such as `state` and `props`) inside the scope of the method.
+
+- A common way used is to explicitly bind `this` in the constructor so `this becomes bound to the class methods after the component is initialized.
+
+`this.handleClick = this.handleClick.bind(this)`
+
+- The above was used in the previous exercise for the `handleClick` method in the constructor.
+- When a function like `this.setState()` is called within the class method, `this` refers to the class and will not be undefined.
+
+```jsx
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: "Hello"
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick() {
+    this.setState({
+      text: "You clicked!"
+    });
+  }
+  render() {
+    return(
+      <div>
+        <button onClick={this.handleClick}>Click Me</button>
+        <h1>{this.state.text}</h1>
+      <div>
     );
   }
 };
