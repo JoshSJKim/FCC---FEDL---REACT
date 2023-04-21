@@ -780,6 +780,43 @@ class MyComponent extends React.Component {
       <div>
         <h1>{name}</h1>
       </div>
+    );kk
+  }
+};
+```
+
+## Set State with this.setState
+
+- Previous challenges covered how initialize `state` in the `constructor`.
+- There is also a way to change the component's `state`.
+- Update the component `state` by calling `this.setState()` in the component class and pass in an object with key-value pairs.
+- The keys are the state properties and the values are the updated state data.
+
+- React never expects `state` to be directly modified.
+- Always use `this.setState()` when state changes occur.
+- Note that React may 'batch' multiple state updates in order to improve performance.
+- In other words, state updates implemented using `setState` method can be asynchronous.
+
+```jsx
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: 'Initial State'
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick() {
+    this.setState({
+      name: 'React Rocks!'
+    });
+  }
+  render() {
+    return (
+      <div>
+        <button onClick={this.handleClick}>Click Me</button>
+        <h1>{this.state.name}</h1>
+      </div>
     );
   }
 };
