@@ -968,3 +968,39 @@ class Counter extends React.Component {
   }
 };
 ```
+
+## Create a Controlled Input
+
+- Applications may have much more complex interactions between `state` and the rendered UI.
+- For example, form control elements, such as `input` and `textarea` maintain its own state in the DOM as the user types.
+- Using React, this mutable state can be moved into a React component state, which means that the user input becomes a part of the application state.
+- In other words, React is able to control the value of that input field.
+- This is particularly useful for validating email addresses and passwords.
+- Used in conjunction with regex, it is possible to display error messages or change colors to warn the user that the format is invalid in real time.
+- Typically, if a user can type into an input field, and that input field is a part of a React component, it will be a controlled input form
+
+```jsx
+class ControlledInput extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: ''
+    };
+    this.handleChange = this.handleChange.bind(this)
+  }
+  handleChange(event) {         // When the input field receives an input, handleChange() method will be called with the input 'event' as its parameter
+    this.setState ({            // this.state.input value will be updated with the input 'event' value.
+      input: event.target.value
+    })
+  };
+  
+  render() {
+    return (
+      <div>
+        <input value={this.state.input} onChange={this.handleChange} />
+        <h4>Controlled Input:</h4>
+        <p>{this.state.input}</p>
+      </div>
+    );
+  }
+};
