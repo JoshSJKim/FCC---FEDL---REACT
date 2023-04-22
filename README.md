@@ -921,3 +921,50 @@ class MyComponent extends React.Component {
   }
 }
 ```
+
+## Write a Simple Counter
+
+```jsx
+class Counter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    };
+
+    this.increment = this.increment.bind(this)  // Bind the methods in the constructor 
+    this.decrement = this.decrement.bind(this)
+    this.reset = this.reset.bind(this)
+
+  }
+
+  increment() {                     // Define the methods to be called when rendered
+    this.setState(state => {
+      return {count: state.count+1} // Failure to include 'return' will return a statement rather than an undated state 
+    })                              // Remember to use curly braces for JS code
+  };
+
+  decrement() {
+    this.setState(state => {
+      return {count: state.count-1}
+    })
+  };
+
+  reset() {
+    this.setState ({                // There is no need to pass in a function here since the count is simply being reset to '0'
+      count: 0
+    })
+  };
+
+  render() {
+    return (
+      <div>
+        <button className='inc' onClick={this.increment}>Increment!</button>
+        <button className='dec' onClick={this.decrement}>Decrement!</button>
+        <button className='reset' onClick={this.reset}>Reset</button>
+        <h1>Current Count: {this.state.count}</h1>
+      </div>
+    );
+  }
+};
+```
