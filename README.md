@@ -858,3 +858,66 @@ class MyComponent extends React.Component {
   }
 };
 ```
+
+## Use State to Toggle an Element
+
+- Sometimes it is necessary to know the previous state when updating the state.
+- As mentioned before, state updates may be asynchronous.
+- It means that the previous value of `this.state` or `this.props` can't relied upon when calculating the next value.
+
+- Pass a function that allows access to state and props to `setState`.
+- Using a function with `setState guarantees the most current values of state and/or props.
+
+```jsx
+this.setState((state, props) => ({
+  counter: state.counter + props.increment
+}));
+```
+
+OR
+
+```jsx
+this.setState(state => ({
+  counter: state.counter + 1
+}));
+```
+
+- Note that the object literal has to be wrapped in parentheses.
+- Otherwise JavaScript will think of it as a block of code.
+
+```jsx
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      visibility: false
+    };
+    this.toggleVisibility = this.toggleVisibility.bind(this) { /* bind 'this' keyword to the method */ }
+  }
+  toggleVisibility() {                  { /* this is the toggleVisibility function */ }
+    this.setState(state => {            { /* Remember that you can write JS with React */ }
+      if (state.visibility === true) {  { /* if state.visibility is 'true', visibility is set to 'false', and vice versa */ }
+        return {visibility: false};     { /* true and false are playing 'tag' in a sense to produce a 'toggle' effect */ }
+      } else {
+        return {visibility: true};
+      }
+    })
+  }
+  render() {
+    if (this.state.visibility) {
+      return {
+        <div>
+          <button onClick={this.toggleVisibility}>Click Me</button> { /* Clicking on the button will call the 'toggleVisibility' function */ }
+          <h1>Now you see me!</h1>
+        </div>
+      };
+    } else {
+      return (
+        <div>
+          <button onClick={this.toggleVisibility}>Click Me</button>
+        </div>
+      );
+    }
+  }
+}
+```
