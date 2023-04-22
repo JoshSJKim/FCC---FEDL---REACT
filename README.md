@@ -1004,3 +1004,48 @@ class ControlledInput extends React.Component {
     );
   }
 };
+```
+
+## Create a Controlled Form
+
+- This is very confusing so far.
+- It's difficult to keep track of what's calling what, and what `this` is referring to.
+
+```jsx
+class MyForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: '',
+      submit: ''
+    };
+    this.handleChange = this.handleChange.bind(this;)
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleChange(event) {
+    this.setState({
+      input: event.target.value
+    });
+  }
+  handleSubmit(event) {
+    this.setState(state => {
+      return {submit: this.state.input}
+    });
+    event.preventDefault()
+  }
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <input value={this.state.input} onChange={this.handleChange} />
+          <button type="submit">Submit!</button>
+        </form>
+        <h1>{this.state.submit}</h1>
+      </div>
+    );
+  }
+}
+```
+
+- I can't even explain the process flow of this code.
+- I'll need some more time on this
