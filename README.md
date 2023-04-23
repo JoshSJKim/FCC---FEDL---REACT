@@ -1052,3 +1052,55 @@ class MyForm extends React.Component {
 
 - I can't even explain the process flow of this code.
 - I'll need some more time on this
+
+
+## Pass State as Props to Child Components
+
+- Commonly, a stateful component contains all of the `state` that are important to the application, which then renders child components.
+- The state should be accessible by the components in the form of passed `props`.
+
+- for example, there is an `App` component that renders a `Navbar`.
+- The `App` also contains multiple `states`, which also contain multiple information.
+- If the `Navbar` only requires access to the username information, that `state` can be passed to the `Navbar` component as a prop.
+
+- Some important things to note:
+  - Unidirectional flow
+    - State flows in one direction down the tree of the application's components - from the stateful parent component to the child components.
+    - The child component only receives the state data it requires.
+  - Complex stateful apps can be broken down into just a few, or maybe a single stateful component.
+    - The rest of the components simply receive state from the parent as props and render a UI from that state.
+    - It begins to create a separation where state management is handled in one part of code and UI rendering in another.
+
+- this principle of separating `state logic` and `UI logic` is one of React's key principles.
+- When used correctly, it makes the design of complex, stateful applications significantly easier to manage.
+
+```jsx
+class MyApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {        // class component with a state defined is also known a 'stateful component' or 'container component'
+      name = 'CamperBot'  // stateful components are used to manage dynamic behaviors of applications, handle user events and update state changes
+    }
+  }
+  render() {
+    return (
+      <div>
+        <Navbar name={this.state.name} /> {/* MyApp component renders 'Navbar', which receives the name property of the MyApp state */ }
+      </div>
+    );
+  }
+};
+
+class Navbar extends React.Component {
+  constructor(props) {
+    super(props);         // class components without a state defined is also known as 'functional component'
+  }                       // It does not perform state management is used to display information or accept user input via props.
+  render() {
+    return(
+      <div>
+        <h1>Hello, my name is: {this.props.name}</h1> { /* functional component 'Navbar' receives the name property passed from the MyApp component as props */}
+      </div>
+    );
+  }
+};
+```
