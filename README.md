@@ -1053,7 +1053,6 @@ class MyForm extends React.Component {
 - I can't even explain the process flow of this code.
 - I'll need some more time on this
 
-
 ## Pass State as Props to Child Components
 
 - Commonly, a stateful component contains all of the `state` that are important to the application, which then renders child components.
@@ -1104,3 +1103,80 @@ class Navbar extends React.Component {
   }
 };
 ```
+
+## Pass a Callback as Props
+
+- Just like you can pass `state` as props to the child components, it is also possible to pass handler functions or any other methods defined on a React component.
+- This way, it is possible for child components to interact with its parent components.
+- It's assigned a name and you have access to that method name under `this.props` in the child component.
+
+```jsx
+class MyApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      inputValue: ''
+    }
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(event) {
+    this.setState({
+      inputValue: event.target.value
+    });
+  }
+  render() {
+    return (
+      <div>
+        <GetInput input={this.state.inputValue} handleChange={this.handleChange} />
+        <RenderInput input={this.state.inputValue} />
+      </div>
+    );
+  }
+};
+
+class GetInput extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h3>Get Input:</h3>
+        <input value={this.props.input} onChange={this.props.handleChange} />
+      </div>
+    );
+  }
+};
+
+class RenderInput extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h3>Input Render:</h3>
+        <p>{this.props.input}</p>
+      </div>
+    );
+  }
+};
+```
+
+- Stateful component `MyApp` maintains the `state` `inputValue`.
+- `handleChange()` method is bound to `MyApp` so that any `state` update will be ultimately handled by `MyApp`.
+- `handleChange()` method updates the state of `inputValue` by targeting the input text information entered (event) in the input field in `GetInput` component.
+- `MyApp` renders both `GetInput` component and `RenderInput` component.
+- `GetInput` is passed an `input` prop assigned to `inputValue` from `MyApp`'s `state`.
+- It's also passed a `handleChange` prop that calls the `handleChange()` method.
+- `RenderInput` is also passed an `input` prop and `inputValue` from `state` is passed to it.
+
+- `GetInput` has an `<h3>` tag that will be displayed when called.
+- It also has a text input field, which is linked to the input prop passed to `GetInput` in the render method in `MyApp`.
+- It will also call the `handleChange()` method to pass over the handles to `MyApp`
+
+- `RenderInput` also has an `<h3>` tag that will be displayed when called.
+- It also has a `<p>` element which will render the text input in the input field.
+
+- when the user types into the input field in GetInput, the handleChange() method passed down from MyApp is called, which then updates the inputValue state of MyApp.
+- This state change causes the MyApp component to re-render, which in turn causes the RenderInput component to display the updated inputValue prop passed down from MyApp.
