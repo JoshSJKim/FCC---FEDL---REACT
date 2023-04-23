@@ -1213,3 +1213,41 @@ class MyComponent extends React.Component {
 ```
 
 - the browser console will display "Mount component".
+
+## Use the Lifecycle Method componentDidMount
+
+- Often times it is necessary to call an API endpoint to retrieve data.
+- When working with React, it is important to know and understand where to perform this action.
+
+- The best practice with React is to place API calls or any calls to the server in the lifecyle method `componentDidMount()`
+- This method is called after a component is mounted to the DOM.
+- Any calls to `setState()` here will trigger an re-rendering of the component.
+- When API is called using this method and the API data returned is used to set the state, it will automatically trigger an update when the data is received.
+
+```jsx
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeUsers: null
+    };
+  }
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({
+        activeUsers: 1273
+      });
+    }, 2500);
+  }
+  render() {
+    return (
+      <div>
+        <h1>Active Users: {this.state.activeUsers} </h1>
+      </div>
+    );
+  }
+};
+```
+
+- The above is a mock API call that simulates a server call requesting data to be retrieved.
+- The time is set to 2.5 seconds
