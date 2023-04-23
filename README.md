@@ -1180,3 +1180,36 @@ class RenderInput extends React.Component {
 
 - when the user types into the input field in GetInput, the handleChange() method passed down from MyApp is called, which then updates the inputValue state of MyApp.
 - This state change causes the MyApp component to re-render, which in turn causes the RenderInput component to display the updated inputValue prop passed down from MyApp.
+
+## Use the Lifecycle Method componentWillMount
+
+- React components have several special methods that provide opportunities to perform actions at specific points in the lifecycle of a component.
+- These are called `lifecycle methods` or `lifecycle hooks`.
+- The execution can occur before they are rendered, before an update, before receiving props, before unmount, etc.
+- Some examples of lifecycle methods are:
+
+- `componentWillMount()`
+- `componentDidMount()`
+- `shouldComponentUpdate()`
+- `componentDidUpdate()`
+- `componentWillUnmount()`
+
+- Note: `componentWillMount` lifecycle method will be deprecated in a future version of 16.x
+
+- `componentWillMount()` method is called before the `render()` method when a component is being mounted to the DOM
+
+```jsx
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  componentWillMount() {
+    console.log("Mount component")
+  }
+  render() {
+    return <div />
+  }
+};
+```
+
+- the browser console will display "Mount component".
