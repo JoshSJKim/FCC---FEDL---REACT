@@ -1037,10 +1037,13 @@ class MyForm extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <input value={this.state.input} onChange={this.handleChange} />
+        { /* 2. When the submit button is clicked, handleSubmit method will be called to return the state input */ }
+          <input value={this.state.input} onChange={this.handleChange} /> 
+          { /* 1. When text is entered, the input value "event" will call the handleChange method (controlled input)*/ }
           <button type="submit">Submit!</button>
         </form>
         <h1>{this.state.submit}</h1>
+        { /* 3. The return value from handleSubmit will be displayed in the <h1> tag */ }
       </div>
     );
   }
