@@ -1251,3 +1251,61 @@ class MyComponent extends React.Component {
 
 - The above is a mock API call that simulates a server call requesting data to be retrieved.
 - The time is set to 2.5 seconds
+
+## Add Event Listeners
+
+- `componentDidMount()` method is also the best place to attach any event listeners you need to add for specific functionality.
+
+- React provides a synthetic event system which wraps the native event system present in browsers.
+- This means that the synthetic event system behaves exactly the same, regardless of the user's browser - even if the native events may behave differently between different browsers.
+
+- Event listeners in React are functions that are registered to handle events triggered by user actions or by the system, such as mouse clicks, key presses, form submissions, to just name a few.
+- React provides a way to attach event listeners to specific elements in the UI using the `on*` props, where `*` is the name of the event.
+- For example, to handle a click event on a button element, you can define a function and pass it as a prop to the `onClick` attribute of the button.
+
+- React's synthetic event system is great to use for most interactions managed on DOM elements.
+- However, in order to attach an event handler to the document or window objects, it must be done directly.
+
+```jsx
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      message: ''
+    };
+    this.handleEnter = this.handleEnter.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+  }
+  componentDidMount() {
+    document.addEventListener("keydown", this.handleKeyPress); // Use quoted strings for event names ('keydown') and callback should be called using 'this.'
+  }
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.handleKeyPress);
+  }
+  handleEnter() {
+    this.setState((state) => ({
+      message: state.message + 'You pressed the enter key! '
+    }));
+  }
+  handleKeyPress() {
+    if (event.keyCode === 13) {
+      this.handleEnter();
+    }
+  }
+  render() {
+    return (
+      <div>
+        <h1>{this.state.message}</h1>
+      </div>
+    );
+  }
+};
+```
+
+- `document.addEventListener(event, function(callback), optional(useCapture)`
+- `document.removeEventListener(event, function(callback), optional(useCapture)`
+- It is good practice to use this lifecycle method to do any cleanup on React components before they are unmounted or destroyed.
+- Failure to remove the event listener can lead to potential memory leaks because the vent listener will continue to exist after the component is removed from the DOM. It could cause unexpected behavior in the application.
+- Also, if the component is re-rendered and mounted again, it will register a new event listener, resulting in duplicate event listeners listening in on the same event.
+- Note: Memory leaks can occur when components that are no longer required continue to hold on to memory resources.
+  - If not properly cleaned up when the component is unmounted or removed from the DOM, it could accumulate over time and eventually lead to performance issues, crashes, or other unexpected behavior.
