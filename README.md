@@ -1369,3 +1369,33 @@ class Controller extends React.Component {
   }
 }
 ```
+
+## Introducing Inline Styles
+
+- Styling JSX elements created in React is a bit different from styling HTML.
+- If styles are imported from a stylesheet, it isn't much different from styling HTML.
+  - Apply a class t the JSX element using the `className` attribute, and apply styles to the class in the stylesheet.
+- Another option is to apply inline styles, which is a very common method.
+
+```HTML
+<div style="color: yellow; font-size: 16px">Mellow Yellow</div>
+```
+
+- Above is HTML.
+- JSX elements also use the `style` attribute.
+- But the values can't be set to a `string` because of the way JSX is transpiled.
+- Set the values equal to a JavaScrip `object` instead.
+
+```JSX
+class Colorful extends React.Component {
+  render() {
+    return (
+      <div style={{color: "red", fontSize: 72}}>Big Red</div>
+    );
+  }
+};
+```
+
+- Notice the use of double curly braces.
+- Notice `px` is omitted from the font size.
+- Notice properties use camelCase instead of kebab-case.
