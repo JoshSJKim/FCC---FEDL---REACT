@@ -1309,3 +1309,63 @@ class MyComponent extends React.Component {
 - Also, if the component is re-rendered and mounted again, it will register a new event listener, resulting in duplicate event listeners listening in on the same event.
 - Note: Memory leaks can occur when components that are no longer required continue to hold on to memory resources.
   - If not properly cleaned up when the component is unmounted or removed from the DOM, it could accumulate over time and eventually lead to performance issues, crashes, or other unexpected behavior.
+
+## Optimize Re-Renders with shouldComponentUpdate
+
+- up until the current exercise, if any component receives new `state` or `props`, it re-renders itself and all its children.
+- This is usually acceptable.
+- React provides a lifecycle method that can be called when child components receive new `state` or `props`, and declare specifically if the components should update or not.
+- It is `shouldComponentUpdate()` method, and it takes `nextProps` and `nextState` as parameters.
+
+- This method is a useful way to optimize performance.
+- For example,the default behavior is that the component re-renders when it receives new `props`, even if the `props` haven't changed.
+- `shouldComponentUpdate()` can be used to prevent this by comparing the `props`.
+- The method must return a `boolean` value that tells React whether or not to update the component.
+- Compare `this.props` to the `nextProps` to determine if update is necessary or not, and return `true` or `false` accordingly.
+
+```jsx
+class OnlyEvens extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  shouldComponentUpdate(nextProps, (nextState)) {
+    console.log('Should I update?');
+    if (nextProps.value % 2 === 0) {
+      // remember that 'nextProps' is not a number. It is an object that contains the next props of the component.
+      // To access a specific prop value, the prop name must be used as a key in the 'nextProps' object, as shown in the example above.
+      return false;
+    } else {
+      return true;
+    }
+  }
+  componentDidUpdate() {
+    console.log('Component re-rendered.');
+  }
+  render() {
+    return <h1>{this.props.value}</h1>
+  }
+}
+
+class Controller extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: 0
+    };
+    this.addValue = this.addValue.bind(this);
+  }
+  addValue() {
+    this.setState(state => ({
+      value: state.value + 1
+    }));
+  }
+  render() {
+    return (
+      <div>
+        <button onClick={this.addValue}>Add</button>
+        <OnlyEvens value={this.state.value} />
+      </div>
+    );
+  }
+}
+```
