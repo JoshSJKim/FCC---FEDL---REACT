@@ -1398,4 +1398,24 @@ class Colorful extends React.Component {
 
 - Notice the use of double curly braces.
 - Notice `px` is omitted from the font size.
+  - all property value length units are assumed to be in `px` unless specified otherwise.
+  - in order to use another unit, wrap the value and unit in quotes `{fontSize: "4em"}`
 - Notice properties use camelCase instead of kebab-case.
+
+## Add Inline Styles in React
+
+- If there is a large set of styles, assign a style `object` to a constant to keep the code organized.
+
+```jsx
+const styles = { color: "purple", fontSize: 40, border: "2px solid purple"};
+
+class Colorful extends React.Component {
+  render() {
+    return (
+      <div style={styles}>Style Me!</div>
+    );
+  }
+};
+```
+
+- Notice that `const styles` is assigned an object (wrapped in curly braces) and when setting `const styles` to the `style` attribute in the `div` element, it also needs to be wrapped in curly braces.
