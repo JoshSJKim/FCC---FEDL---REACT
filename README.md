@@ -1514,7 +1514,7 @@ class MagicEightBall extends React.Component {  // stateful component with const
       userInput: '',
       randomIndex: ''
     };
-    this.ask = this.ask.bind(this);                         // 'bind' section
+    this.ask = this.ask.bind(this);                         // 'bind' section within constructor
     this.handleChange = this.handleChange.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
   }
@@ -1543,7 +1543,7 @@ class MagicEightBall extends React.Component {  // stateful component with const
     });
   }
   render() {                                      // render method section
-    const possibleAnswers = [                     // Add JavaScript if necessary
+    const possibleAnswers = [                     // Add JavaScript if necessary within render() method before 'return'
       'It is certain',
       'It is decidedly so',
       'Without a doubt',
@@ -1566,7 +1566,7 @@ class MagicEightBall extends React.Component {  // stateful component with const
       'Very doubtful'
     ];
     const answer = this.state.randomIndex;
-    return (                                      // return section
+    return (                                      // return section within render() method
       <div>
         <input type="text" value={this.state.userInput} onChange={this.handleChange} style={inputStyle} />
         <br />
@@ -1578,3 +1578,47 @@ class MagicEightBall extends React.Component {  // stateful component with const
     );
   }
 };
+```
+
+## Render with an If-else condition
+
+- Another application of JS when rendering is to tie the elements that are rendered to a condition.
+- When the condition is true, one view renders. If false, it renders a different view.
+- This is achievable using a standard `if/else` statement in the `render()` method.
+
+```jsx
+class MyComponent extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      display = true;
+    }
+    this.toggleDisplay = this.toggleDisplay.bind(this);
+  }
+  toggleDisplay() {
+    this.setState((state) => ({
+      display: !state.display
+    }));
+  }
+  render() {
+    if (this.state.display) {
+      return (
+        <div>
+          <button onClick={this.toggleDisplay}>Toggle Display</button>
+          <h1>Displayed!</h1>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <button onClick={this.toggleDisplay}>Toggle Display</button>
+        </div>
+      )
+    }
+  }
+};
+```
+
+## Use && for a More Concise Conditional
+
+- 
