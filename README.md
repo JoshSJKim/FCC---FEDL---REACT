@@ -1419,3 +1419,162 @@ class Colorful extends React.Component {
 ```
 
 - Notice that `const styles` is assigned an object (wrapped in curly braces) and when setting `const styles` to the `style` attribute in the `div` element, it also needs to be wrapped in curly braces.
+
+## Use Advanced JavaScript in React Render Method
+
+- It is possible to write JavaScript directly in the `render` methods before the `return` statement.
+- At this point, curly braces are not required since it is not yet within the JSX code.
+- When using the variables declared as JS later in the code, it must be placed inside curly braces.
+
+```jsx
+const inputStyle = {    // inline style declared.
+  width: 235,
+  margin: 5
+};
+
+class MagicEightBall extends React.Component {d
+  constructor(props) {
+    super(props);
+    this.state= {
+      userInput: '',
+      randomIndex: ''
+    };
+    this.ask = this.ask.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+  ask() {
+    if (this.state.userInput) {   // 'ask' method is called when the button is clicked.
+      this.setState({
+        randomIndex: Math.floor(Math.random() * 20),  // 'randomIndex' generates a random integer between 0 and 19, and it is stored in the state.
+        userInput: ''                                 // userInput is reset to an empty string.
+      });
+    }
+  }
+  handleChange(event) {
+    this.setState({
+      userInput: event.target.value
+    });
+  }
+  render() {
+        const possibleAnswers = [
+          'It is certain',
+          'It is decidedly so',
+          'Without a doubt',
+          'Yes, definitely',
+          'You may rely on it',
+          'As I see it, yes',
+          'Outlook good',
+          'Yes',
+          'Signs point to yes',
+          'Reply hazy try again',
+          'Ask again later',
+          'Better not tell you now',
+          'Cannot predict now',
+          'Concentrate and ask again',
+          "Don't count on it",
+          'My reply is no',
+          'My sources say no',
+          'Most likely',
+          'Outlook not so good',
+          'Very doubtful'
+        ];
+        const answer = this.state.randomIndex;  // const variable 'answer' is assigned with the randomly generated index value
+    return (
+      <div>
+        <input type="text" value={this.state.userInput} onChange={this.handleChange} style={inputStyle} />
+        { /* 1. When text is entered in the input field, it calls the 'handleChange' method, updates the 'userInput', making it a controlled input.
+                'inputStyle' defined globally is assigned to 'style' */ }
+        <br />
+        <button onClick={this.ask}>Ask the Magic Eight Ball!</button>
+        { /* 2 when button is clicked, it calls the 'ask' method. */ }
+        <br />
+        <h3>Answer:</h3>
+        <p>{possibleAnswers[answer]}</p> 
+        { /* When rendered, the browser page will display a randomly generated message from the 'possibleAnswers' array with the randomly generated index value */ }
+      </div>
+    );
+  }
+};
+```
+
+- Add some more code so that pressing enter has the same effect as clicking the button.
+- Make sure to clean up the components.
+- For the ask() method, ensure that key press only works if text is entered in the input field
+
+```jsx
+const inputStyle = {      // inline styling
+  width: 235,
+  margin: 5
+};
+
+class MagicEightBall extends React.Component {  // stateful component with constructor and state
+  constructor(props) {                        
+    super(props);
+    this.state = {
+      userInput: '',
+      randomIndex: ''
+    };
+    this.ask = this.ask.bind(this);                         // 'bind' section
+    this.handleChange = this.handleChange.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+  }
+  componentDidMount() {                                         // Add lifecycle methods
+    document.addEventListener("keydown", this.handleKeyPress);
+  }
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.handleKeyPress);
+  }
+  handleKeyPress(event) {                                   // Add other methods
+    if (this.state.userInput && event.keycode === 13) {
+      this.ask();
+    }
+  }
+  ask() {
+    if (this.state.userInput) {
+      this.setState({
+        randomIndex: Math.floor(Math.random() * 20),
+        userInput: ''
+      });
+    }
+  }
+  handleChange(event) {
+    this.setState({
+      userInput: event.target.value
+    });
+  }
+  render() {                                      // render method section
+    const possibleAnswers = [                     // Add JavaScript if necessary
+      'It is certain',
+      'It is decidedly so',
+      'Without a doubt',
+      'Yes, definitely',
+      'You may rely on it',
+      'As I see it, yes',
+      'Outlook good',
+      'Yes',
+      'Signs point to yes',
+      'Reply hazy try again',
+      'Ask again later',
+      'Better not tell you now',
+      'Cannot predict now',
+      'Concentrate and ask again',
+      "Don't count on it",
+      'My reply is no',
+      'My sources say no',
+      'Most likely',
+      'Outlook not so good',
+      'Very doubtful'
+    ];
+    const answer = this.state.randomIndex;
+    return (                                      // return section
+      <div>
+        <input type="text" value={this.state.userInput} onChange={this.handleChange} style={inputStyle} />
+        <br />
+        <button onClick={this.ask}>Ask the Magic Eight Ball!</button>
+        <br />
+        <h3>Answer:</h3>
+        <p>{possibleAnswers[answer]}</p>
+      </div>
+    );
+  }
+};
