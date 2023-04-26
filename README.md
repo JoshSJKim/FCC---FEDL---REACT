@@ -1621,4 +1621,41 @@ class MyComponent extends React.Component {
 
 ## Use && for a More Concise Conditional
 
-- 
+- There is a more concise method to achieve the same result shown in the previous exercise.
+- If there are multiple conditions in a component and each condition renders a slightly different UI based on the `else if` conditions, it is prone to error.
+- Use the `&&` logical operator to perform conditional logic.
+- This is possible since we're working with boolean values at the moment.
+
+`{condition && <p>markup</p>}`
+
+- If the condition is true, it returns the markup.
+- If false, the operation will evaluate the condition and return nothing.
+- These statements can be included directly in the JSX, and multiple conditions can be stringed together by joining each condition with a `&&`.
+- This allows for handling complex logic in the `render()` method without the redundancy.
+
+```jsx
+class MyComponent extends React.Component :{
+  constructor(props) {
+    super(props);
+    this.state = {
+      display: true
+    }
+    this.toggleDisplay = this.toggleDisplay.bind(this);
+  }
+  toggleDisplay() {
+    this.setState((state) => ({
+      display: !state.display
+    }));
+  }
+  render () {
+    return (
+      <div>
+        <button onClick={this.toggleDisplay}>Toggle Display</button>
+        {this.state.display && <h1>Displayed!</h1>} 
+        { /* Notice that it does not require 'if' statements. 
+             Simply wrap the condition and the markup separated by '&&" in curly braces */ }
+      </div>
+    );
+  }
+};
+```
