@@ -1659,3 +1659,62 @@ class MyComponent extends React.Component :{
   }
 };
 ```
+
+## Use a Ternary Expression for Conditional Rendering
+
+- There is one more way to use built-in JS conditionals for rendering: ternary operator.
+- It is often used as a shortcut for `if/else` statements in JS.
+- They're not quite as robust as traditional `if/else` statements, but it is popular among React developers for various reasons.
+- One of the main reasons is that it can be inserted directly into the JSX code.
+- Notice that traditional `if/else` statements are always placed outside the return statement.
+
+`condition ? expressionIfTrue : expressionIfFalse;`
+
+```jsx
+const inputStyle = {
+  width: 235,
+  margin: 5
+};
+
+class CheckUserAge extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: '',
+      userAge: ''
+    }
+    this.submit = this.submit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(event) {
+    this.setState({
+      input: event.target.value,
+      userAge: ''
+    });
+  }
+  submit() {
+    this.setState((state) => ({
+      userAge: state.input
+    }));
+  }
+  render() {
+    const buttonOne = <button onClick={this.submit}>Submit</button>;
+    const buttonTwo = <button>You May Enter</button>;  // add (onClick={this.handleChange}) to buttonTwo and buttonThree to reset the input field when clicked on
+    const buttonThree = <button>You Shall Not Pass</button>;
+    return (
+      <div>
+        <h3>Enter Your Age to Continue</h3>
+        <input 
+          style={inputStyle}
+          type='number'
+          value={this.state.input}
+          onChange={this.handleChange}
+        />
+        <br />
+        {this.state.userAge == '' ? buttonOne :             // if input field is an empty string, render buttonOne
+         this.state.userAge >= 18 ? buttonTwo : buttonThree}
+      </div>
+    );
+  }
+}
+```
