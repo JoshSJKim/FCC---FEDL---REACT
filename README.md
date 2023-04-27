@@ -1718,3 +1718,49 @@ class CheckUserAge extends React.Component {
   }
 }
 ```
+
+## Render Conditionally from Props
+
+- The `if/else`, `&&`, and `ternary operator` conditionals can be used with another React feature: props.
+- Using props to conditionally render code is very common among React developers.
+- The value of a given prop is used to automatically make decisions about what to render.
+
+```jsx
+class Results extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return <h1>{this.props.fiftyFifty? "You Win!" : "You Lose!"}</h1>;
+  }
+}
+
+class GameOfChance extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      counter: 1
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick() {
+    this.setState(prevState => {    // prevState is a parameter that represents the previous sate of a component before an update.
+      return(
+        counter: prevState.counter + 1
+      )
+    });
+  }
+  render() {
+    const expression = Math.random() >= 0.5;
+    return (
+      <div>
+        <button onClick={this.handleClick}>Play Again</button>
+        <Results fiftyFifty = {expression} />
+        <p>{'Turn: ' + this.state.counter}</p>
+      </div>
+    );
+  }
+}
+```
+
+- Note: It doesn't matter whether the child component is defined before the parent component and vice versa, as long as it's referencing the appropriate state and props.
