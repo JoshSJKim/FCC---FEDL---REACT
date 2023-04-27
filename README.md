@@ -1764,3 +1764,51 @@ class GameOfChance extends React.Component {
 ```
 
 - Note: It doesn't matter whether the child component is defined before the parent component and vice versa, as long as it's referencing the appropriate state and props.
+
+## Change Inline CSS Conditionally Based on Component State
+
+- CSS can be rendered conditionally based on the state of a React component.
+- Check for a condition, if the condition is satisfied, modify the styles object that is assigned to the JSX elements in the render method.
+
+- Traditional approach to applying styles by modifying DOM elements directly (common in jQuery) requires the developer to keep track of element changes, and also handle actual manipulations directly.
+- Keeping track of changes can become overbearing, and potentially make the UI unpredictable.
+- By setting a style object based on a condition, the developer has control over how the UI should look as a function of the application's state.
+- The flow of information is clear, and it move only in one direction.
+- This is the preferred way of writing applications with React.
+
+```jsx
+class GateKeeper extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: ''
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(event) {
+    this.setState({
+      input: event.target.value
+    })
+  }
+  render() {
+    let inputStyle = {
+      border: '1px solid black'
+    };
+    {if (this.state.input.length > 15) {  // This is the conditional to check if the input length is greater than 15 characters
+      inputStyle = {                      // if so, the inputStyle changes to the specified border style. 
+        border: '3px solid red'
+      }
+    }};
+    return (
+      <div>
+        <h3>Don't Type Too Much:</h3>
+        <input
+          type='text'
+          style={inputStyle}
+          value={this.state.input}
+          onChange={this.handleClick} />
+      </div>
+    );
+  }
+};
+```
