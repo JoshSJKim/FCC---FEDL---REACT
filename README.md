@@ -1853,6 +1853,9 @@ class MyToDoList extends React.Component {
   }
   render() {
     const items = this.state.toDoList.map(i => <li>{i}</li>)
+    // sibling child elements created by a mapping operation need to be supplied with a unique key attribute.
+    // this.state.toDoList.map((item, index) => (<li key={index}>{item}</li>))
+    // This will be covered in the next exercise.
     return (
       <div>
         <textarea
@@ -1877,3 +1880,41 @@ class MyToDoList extends React.Component {
 - When rendered, the updated 'toDoList' in the state will be mapped.
   - each item 'i' will be dynamically rendered as a list item `<li>` and stored in the variable `items`
 - `items` is rendered into an unordered list `<ul>`
+
+## Give Sibling Elements a Unique Key Attribute
+
+- When an array of elements is created, each element requires a `key` attribute set to a unique value.
+- React uses these `keys` to keep track of which items are added, changed, or removed.
+- This helps make the re-rendering process more efficient when the list is modified.
+- Note: Keys only need to be unique between sibling elements, not globally unique in the application.
+
+```jsx
+const frontEndFrameworks = [
+  'React',
+  'Angular',
+  'Ember',
+  'Knockout',
+  'Backbone',
+  'Vue'
+];
+
+function Frameworks() {
+  const renderFrameworks = 
+  frontEndFrameworks.map((item) => <li key={item}>{item}</li>);
+  return (
+    <div>
+      <h1>Popular Front End JavaScript Frameworks</h1>
+      <ul>
+      {renderFrameworks}
+      </ul>
+    </div>
+  );
+};
+```
+
+- It is best practice to make the key something that uniquely identifies the element being rendered.
+- As a last resort, the array index may be used, but this should be avoided.
+- If the order of the elements change, or if new elements are added, or elements are removed from the array, the index may point to an unintended element.
+- using the value of the `item` as the `key` value would be the safest approach.
+
+## Use Array.filter() to Dynamically Filter an Array
