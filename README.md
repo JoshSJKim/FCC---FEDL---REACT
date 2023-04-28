@@ -1969,3 +1969,29 @@ class MyComponent extends React.Component {
   }
 }
 ```
+
+## Render React on the Server with renderToString
+
+- The exercises up to this point generally involved rendering React components on the client side.
+- However, there are cases where it makes sense to render a React component on the server side.
+- Since React is a JS view library, JS can run on the server with Node.
+- React provides `renderToString()` method for such purposes.
+
+- There are two main reasons why rendering on the server may be used.
+- First, without rendering on the server side, the React application would consist of a relatively empty HTML file and a large bundle of JS when it is initially loaded to the browser.
+  - This is not ideal for search engines that are trying to index the content of the pages so that people can find you.
+  - If the initial HTML markup is rendered on the server side and sent to the client, the initial page load contains all of the page's markup that can be searched by search engines.
+- Secondly, this creates a faster initial page load experience because the rendered HTML is smaller than the JS code of the entire app.
+
+```jsx
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return <div />
+  }
+};
+
+ReactDOMServer.renderToString(<App />)
+```
