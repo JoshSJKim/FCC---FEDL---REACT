@@ -1525,7 +1525,7 @@ class MagicEightBall extends React.Component {  // stateful component with const
     document.removeEventListener("keydown", this.handleKeyPress);
   }
   handleKeyPress(event) {                                   // Add other methods
-    if (this.state.userInput && event.keycode === 13) {
+    if (this.state.userInput && event.keyCode === 13) {
       this.ask();
     }
   }
@@ -1812,3 +1812,68 @@ class GateKeeper extends React.Component {
   }
 };
 ```
+
+## Use Array.map() to Dynamically Render Elements
+
+- Conditional rendering is useful, but it many be necessary to render an unknown number of elements.
+- Often in reactive programming, the programmer has no way of knowing what the state of an application is until runtime.
+- This is because so much depends on a user's interaction with the program.
+- The code must be written to handle the unknown state, ahead of time.
+- Use of `Array.map()` in React illustrates this concept.
+
+- For example, if there is a simple program that creates a 'To Do List', it is impossible for the programmer to know how many items the user has on his/her list.
+- The component must be set up to dynamically render the correct number of list elements.
+
+```jsx
+const textAreaStyles = {
+  width: 235,
+  margin: 5
+};
+
+class MyToDoList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userInput: '',
+      toDoList: []
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleSubmit() {
+    const itemsArray = this.state.userInput.split(',');
+    this.setState({
+      toDoList: itemsArray
+    });
+  }
+  handleChange(event) {
+    this.setState({
+      userInput: event.target.value
+    });
+  }
+  render() {
+    const items = this.state.toDoList.map(i => <li>{i}</li>)
+    return (
+      <div>
+        <textarea
+          onChange={this.handleChange}
+          value={this.state.userInput}
+          style={textAreaStyles}
+          placeholder='Separate Items With Commas'
+        />
+        <br />
+        <button onClick={this.handleSubmit}>Create List</button>
+        <h1>My "To DO" List</h1>
+        <ul>{items}</ul>
+      </div>
+    );
+  }
+}
+```
+
+- When the user enters the list items, separated by commas as specified with the placeholder, and clicks the button, it will call the 'handleSubmit' method.
+- 'handleSubmit' will split the entered items `userInput` at every 'comma' and assign the result to a variable 'itemsArray'
+- the empty array 'toDoList' in the state will be updated with 'itemsArray' data.
+- When rendered, the updated 'toDoList' in the state will be mapped.
+  - each item 'i' will be dynamically rendered as a list item `<li>` and stored in the variable `items`
+- `items` is rendered into an unordered list `<ul>`
